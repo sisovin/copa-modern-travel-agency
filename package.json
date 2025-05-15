@@ -1,0 +1,24 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend dev\"",
+    "build": "pnpm --filter frontend build && pnpm --filter backend build",
+    "start": "pnpm --filter frontend start && pnpm --filter backend start"
+  },
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5",
+    "eslint": "^7.32.0",
+    "prettier": "^2.3.2"
+  },
+  "workspaces": [
+    "apps/frontend",
+    "apps/backend",
+    "shared/*",
+    "libs/*"
+  ]
+}
