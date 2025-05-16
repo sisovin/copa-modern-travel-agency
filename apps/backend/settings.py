@@ -20,6 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'users',
+    'destinations',
+    'bookings',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +121,6 @@ SIMPLE_JWT = {
 
 # CORS
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+
+# Custom User Model
+AUTH_USER_MODEL = 'users.User'
