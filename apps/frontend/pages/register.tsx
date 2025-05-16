@@ -4,6 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import zxcvbn from 'zxcvbn';
 import '../styles/register.css';
+import Toast from '../components/Toast';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -18,9 +21,18 @@ const RegisterPage = () => {
   });
 
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [toast, setToast] = useState({ message: '', type: '', visible: false });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('/api/register/', data);
+      const { access, refresh } = response.data;
+      Cookies.set('access_token', access);
+      Cookies.set('refresh_token', refresh);
+      // Redirect to dashboard or another page
+    } catch (error) {
+      setToast({ message: 'Registration failed. Please try again.', type: 'error', visible: true });
+    }
   };
 
   const handlePasswordChange = (e) => {
@@ -28,9 +40,14 @@ const RegisterPage = () => {
     setPasswordStrength(score);
   };
 
+  const handleToastClose = () => {
+    setToast({ ...toast, visible: false });
+  };
+
   return (
     <div className="register-container">
       <h2>Register</h2>
+      {toast.visible && <Toast message={toast.message} type={toast.type} onClose={handleToastClose} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label>Name</label>
