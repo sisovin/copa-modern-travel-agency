@@ -1,31 +1,36 @@
 import React from 'react';
+import Header from '../components/Header';
+import HeroSection from '../components/HeroSection';
+import DestinationCard from '../components/DestinationCard';
 
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <section className="hero bg-blue-500 text-white py-20">
-        <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold">Welcome to Our Travel Agency</h1>
-          <p className="mt-4 text-xl">Discover your next adventure with us</p>
-        </div>
-      </section>
+      <Header />
+      <HeroSection />
 
       <section className="featured-destinations py-20">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center">Featured Destinations</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-            <div className="destination bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold">Destination 1</h3>
-              <p className="mt-2">Description of Destination 1</p>
-            </div>
-            <div className="destination bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold">Destination 2</h3>
-              <p className="mt-2">Description of Destination 2</p>
-            </div>
-            <div className="destination bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold">Destination 3</h3>
-              <p className="mt-2">Description of Destination 3</p>
-            </div>
+            <DestinationCard
+              image="/path/to/image1.jpg"
+              title="Destination 1"
+              price="$1000"
+              rating={4.5}
+            />
+            <DestinationCard
+              image="/path/to/image2.jpg"
+              title="Destination 2"
+              price="$1200"
+              rating={4.7}
+            />
+            <DestinationCard
+              image="/path/to/image3.jpg"
+              title="Destination 3"
+              price="$900"
+              rating={4.3}
+            />
           </div>
         </div>
       </section>
